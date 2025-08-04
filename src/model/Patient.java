@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Patient extends Person  implements Comparable<Patient>, Serializable {
+    private static final long serialVersionUID = 1L;
     private String benhLi;
     private Date ngayDangKy;
 

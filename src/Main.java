@@ -1,7 +1,9 @@
 import model.Patient;
 import service.ClinicService;
+import service.PatientFileService;
 import service.SortByNameDescending;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -28,5 +30,24 @@ public class Main {
         System.out.println("--- S?p x?p theo t?n gi?m d?n ---");
         list.sort(new SortByNameDescending());
         list.forEach(System.out::println);
+
+        List<Patient> listPatients = new ArrayList<>();
+
+        // T?o danh s?ch b?nh nh?n
+        Patient p3 = new Patient("C?m c?m", new Date());
+        p1.setName("Nguy?n V?n A");
+        p1.setCccd("123456789");
+
+        listPatients.add(p3);
+
+        PatientFileService fileService = new PatientFileService();
+        fileService.savePatients(listPatients);
+
+        // ??c l?i file
+        List<Patient> loaded = fileService.loadPatients();
+        System.out.println("? Danh s?ch ??c t? file:");
+        if (loaded != null) {
+            loaded.forEach(System.out::println);
+        }
     }
 }
