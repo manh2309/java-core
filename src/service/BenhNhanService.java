@@ -1,19 +1,22 @@
 package service;
 
 import model.BenhNhan;
+import repository.BenhNhanRepository;
 
 import java.util.*;
 
 public class BenhNhanService {
-
+    private BenhNhanRepository repository = new BenhNhanRepository();
+    private String FILE_PATH = "data/benhnhan.json";
     private List<BenhNhan> danhSach;
 
     public BenhNhanService() {
-        this.danhSach = new ArrayList<>();
+        this.danhSach = repository.readFromFile(FILE_PATH);
     }
 
     public void addBenhNhan(BenhNhan benhNhan) {
         this.danhSach.add(benhNhan);
+        repository.saveToFile(danhSach, FILE_PATH);
     }
 
     public void timKiemBenhNhanTheoCCCD(String cccd) {
@@ -24,14 +27,16 @@ public class BenhNhanService {
 
     public void xoaBenhNhanTheoCCCD(String cccd) {
         this.danhSach.removeIf(bnhNhan -> bnhNhan.getCccd().equals(cccd));
+        repository.saveToFile(danhSach, FILE_PATH);
     }
 
-    public void hienThiDanhSach() {
-        this.danhSach.stream().forEach(bnhNhan -> System.out.println(bnhNhan));
+    public List<BenhNhan> hienThiDanhSach() {
+        return this.danhSach;
     }
 
     public void sapXepTheoTen() {
         this.danhSach.sort(Comparator.comparing(BenhNhan::getHoTen));
+        repository.saveToFile(danhSach, FILE_PATH);
     }
 
 

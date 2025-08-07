@@ -34,7 +34,9 @@ public class Menu {
                         BenhNhan benhNhan = service.nhapBenhNhanTuBanPhim();
                         service.addBenhNhan(benhNhan);
                         }
-                case 2 -> service.hienThiDanhSach();
+                case 2 -> {
+                    System.out.println(service.hienThiDanhSach());
+                }
                 case 3 -> {
                     System.out.print("Nh?p CCCD c?n t?m: ");
                     String cccd = scanner.nextLine();
